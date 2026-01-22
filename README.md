@@ -1,4 +1,4 @@
-# <em>Web<sup>3</sup></em>
+# <em>FooBar Eats</em>
 
 This repo uses VSCode's Dev Containers extension to standardize the development environment and avoid headache-inducing installation. All development will happen inside a Docker container which installs the same dependencies and versions on every developer's machine.
 

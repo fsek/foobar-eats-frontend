@@ -9,99 +9,99 @@ import { URL } from "node:url";
 const OUTPUT_FILE = "openapi.cleaned.json";
 
 function stripPrefixFromOperationIds(doc: any) {
-	if (!doc.paths) return;
+  if (!doc.paths) return;
 
-	for (const pathKey of Object.keys(doc.paths)) {
-		const pathItem = doc.paths[pathKey];
-		for (const methodKey of Object.keys(pathItem)) {
-			const operation = pathItem[methodKey];
-			if (
-				operation &&
-				typeof operation.operationId === "string" &&
-				operation.operationId.indexOf("-") !== -1
-			) {
-				operation.operationId = operation.operationId.slice(
-					operation.operationId.indexOf("-") + 1,
-				);
-			}
-		}
-	}
+  for (const pathKey of Object.keys(doc.paths)) {
+    const pathItem = doc.paths[pathKey];
+    for (const methodKey of Object.keys(pathItem)) {
+      const operation = pathItem[methodKey];
+      if (
+        operation &&
+        typeof operation.operationId === "string" &&
+        operation.operationId.indexOf("-") !== -1
+      ) {
+        operation.operationId = operation.operationId.slice(
+          operation.operationId.indexOf("-") + 1,
+        );
+      }
+    }
+  }
 }
 
 async function readInput(input: string | URL): Promise<string> {
-	if (input instanceof URL) {
-		if (input.protocol === "file:") {
-			return fs.readFileSync(fileURLToPath(input), "utf8");
-		}
-		const res = await fetch(input);
-		if (!res.ok) {
-			throw new Error(`Failed to fetch ${input}: ${res.status}`);
-		}
-		return await res.text();
-	}
+  if (input instanceof URL) {
+    if (input.protocol === "file:") {
+      return fs.readFileSync(fileURLToPath(input), "utf8");
+    }
+    const res = await fetch(input);
+    if (!res.ok) {
+      throw new Error(`Failed to fetch ${input}: ${res.status}`);
+    }
+    return await res.text();
+  }
 
-	try {
-		return fs.readFileSync(input, "utf8");
-	} catch {
-		// Try to interpret as URL
-		const maybeUrl = new URL(input);
-		return readInput(maybeUrl);
-	}
+  try {
+    return fs.readFileSync(input, "utf8");
+  } catch {
+    // Try to interpret as URL
+    const maybeUrl = new URL(input);
+    return readInput(maybeUrl);
+  }
 }
 
 async function runOpenApiTS() {
-	const runner = typeof Bun !== "undefined" ? "bunx" : "npx";
-	console.log(`🚀 Running openapi-ts via ${runner}...`);
+  const runner = typeof Bun !== "undefined" ? "bunx" : "npx";
+  console.log(`🚀 Running openapi-ts via ${runner}...`);
 
-	const proc = spawnSync(runner, ["@hey-api/openapi-ts", "-i", OUTPUT_FILE], {
-		stdio: "inherit",
-		shell: true,
-	});
+  const proc = spawnSync(runner, ["@hey-api/openapi-ts", "-i", OUTPUT_FILE], {
+    stdio: "inherit",
+    shell: true,
+  });
 
-	if (proc.status !== 0) throw new Error("openapi-ts failed");
-	console.log("✅ openapi-ts completed successfully");
+  if (proc.status !== 0) throw new Error("openapi-ts failed");
+  console.log("✅ openapi-ts completed successfully");
 }
 
 async function main(input: string | URL) {
-	const raw = await readInput(input);
-	const doc = JSON.parse(raw);
+  const raw = await readInput(input);
+  const doc = JSON.parse(raw);
 
-	stripPrefixFromOperationIds(doc);
+  stripPrefixFromOperationIds(doc);
 
-	fs.writeFileSync(OUTPUT_FILE, JSON.stringify(doc, null, 2), "utf8");
-	console.log(`✅ Cleaned OpenAPI written to ${OUTPUT_FILE}`);
+  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(doc, null, 2), "utf8");
+  console.log(`✅ Cleaned OpenAPI written to ${OUTPUT_FILE}`);
 
-	try {
-		await runOpenApiTS();
-	} finally {
-		try {
-			fs.unlinkSync(OUTPUT_FILE);
-			console.log(`🧹 Removed temporary file: ${OUTPUT_FILE}`);
-		} catch (err) {
-			console.warn(`⚠️ Could not remove ${OUTPUT_FILE}:`, err);
-		}
-	}
+  try {
+    await runOpenApiTS();
+  } finally {
+    try {
+      fs.unlinkSync(OUTPUT_FILE);
+      console.log(`🧹 Removed temporary file: ${OUTPUT_FILE}`);
+    } catch (err) {
+      console.warn(`⚠️ Could not remove ${OUTPUT_FILE}:`, err);
+    }
+  }
 }
 
 // Prefer local openapi.json if present. This is used in the github actions test runner.
 // Otherwise use the local server URL.
 const defaultInput = fs.existsSync("openapi.json")
-	? "openapi.json"
-	: "http://host.docker.internal:8000/openapi.json";
+  ? "openapi.json"
+  : "https://backend.fsektionen.se/openapi.json";
 
 const arg = process.argv[2] ?? defaultInput;
 
 console.log("ℹ️ Using OpenAPI source:", arg);
 
 const input = (() => {
-	try {
-		return new URL(arg);
-	} catch {
-		return arg;
-	}
+  try {
+    return new URL(arg);
+  } catch {
+    return arg;
+  }
 })();
 
 main(input).catch((err) => {
-	console.error("❌ Error:", err);
-	process.exit(1);
+  console.error("❌ Error:", err);
+  process.exit(1);
 });
