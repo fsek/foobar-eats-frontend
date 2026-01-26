@@ -12,6 +12,13 @@ You can either run the project locally or via Github codespaces. Since Github ha
 2. Go to the codespaces tab and create a new codespace
 3. Everything should set itself up automatically, wait until it says "your application running is available at...".
 4. If you want to get back to the codespace after closing it, go to the repository and once again click the green CODE button. It should show up in a list. You can also choose to open the codespace using vscode if you don't like the URL bar at the top, by clicking the three dots next to the codespace.
+5. Open a new Bash terminal (`Ctrl + Shift + Ö`) and run: `bun install`, `bun run generate-api` and then `bun run dev`. If you are developing the [backend application](https://github.com/fsek/WebWebWeb) and want to test the frontend against it, make sure to specify the backend URL in the `.env` file with `NEXT_PUBLIC_API_BASE_URL="http://localhost:8000"`. Otherwise <https://stage.backend.fsektionen.se> will be used.
+
+
+
+    - If you start WebWebWeb in a VSCode window, closing the window or switching to WWW-Web in the same VSCode window will terminate the backend. Open another window instead.
+
+6. Go to http://127.0.0.1:3000/ (or http://localhost:3000/admin) for the website where you can see the project🎉🥳🇱 🇬 🇹 🇲
 
 ### Running Locally
 
