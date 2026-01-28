@@ -1,4 +1,5 @@
 "use client";
+import {getMenuOptions} from "src/api/@tanstack/react-query.gen.ts";
 
 export default function Page() {
 	function onButtonClick() {
