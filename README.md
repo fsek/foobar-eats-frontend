@@ -1,6 +1,15 @@
-# <em>FooBar Eats</em>
+# <em>FooBar Eats Frontend</em>
 
-This repo uses VSCode's Dev Containers extension to standardize the development environment and avoid headache-inducing installation. All development will happen inside a Docker container which installs the same dependencies and versions on every developer's machine.
+## Specifikation
+Hej nya spindel! Det är dags att bygga en hemsida för Foobar Eats™. Hemsidan är under utvecklingen kopplad till den provosoriska backenden https://foobar-eats.fly.dev, och de som går in på er klient bör kunna:
+
+- Se restaurangens meny
+- Lägga till en ny order
+- Se orderstatus för någon order med ett givet id
+
+Det finns två ställen där ni kan läsa exakt vad backenden kan göra så att ni vet hur ni måste interagera med den. På https://foobar-eats.fly.dev/docs finns en detaljerad specifikation av alla så kallade routes (funktioner som ni kan kommunicera med) på den provosoriska backenden, samt alla schemas som säger hur datan som ni skickar in till backenden och som backenden skickar tillbaka måste se ut. Denna sida kan vara lättare att förstå (och går att testa själv) än det nästkommande alternativet. Att bara kolla på den sidan ger er däremot inte de exakta funktionsnamnen som er sida av API:n (länken mellan backend och frontend) använder. Efter ni har kört `bun run generate-api` enligt installationsguiden nedan kommer en fil skapas i `src/api/@tanstack/react-query.gen.ts`. I denna ligger de funktioner ni måste importera och använda (exempelvis `export const getMenuOptions`). För exempel på hur detta görs kan ni kolla på [koden till riktiga frontend genom github](https://github.com/fsek/WWW-Web), kolla till exempel `src/app/(public)/songs/page.tsx`.
+
+Ni kan i filen ovan se att vi använder [tanstack query](https://tanstack.com/query/latest/docs/framework/react/overview) för att kommunicera med backenden. Detaljer är överkurs och förklaras bäst på tanstacks hemsida, men det gör att vi inte behöver hålla koll på vad som händer med individuella requests som vi skickar till backenden och därmed kan abstrahera bort mycket av det jobbiga. 
 
 ## Installation
 
@@ -12,13 +21,8 @@ You can either run the project locally or via Github codespaces. Since Github ha
 2. Go to the codespaces tab and create a new codespace
 3. Everything should set itself up automatically, wait until it says "your application running is available at...".
 4. If you want to get back to the codespace after closing it, go to the repository and once again click the green CODE button. It should show up in a list. You can also choose to open the codespace using vscode if you don't like the URL bar at the top, by clicking the three dots next to the codespace.
-5. Open a new Bash terminal (`Ctrl + Shift + Ö`) and run: `bun install`, `bun run generate-api` and then `bun run dev`. If you are developing the [backend application](https://github.com/fsek/WebWebWeb) and want to test the frontend against it, make sure to specify the backend URL in the `.env` file with `NEXT_PUBLIC_API_BASE_URL="http://localhost:8000"`. Otherwise <https://stage.backend.fsektionen.se> will be used.
-
-
-
-    - If you start WebWebWeb in a VSCode window, closing the window or switching to WWW-Web in the same VSCode window will terminate the backend. Open another window instead.
-
-6. Go to http://127.0.0.1:3000/ (or http://localhost:3000/admin) for the website where you can see the project🎉🥳🇱 🇬 🇹 🇲
+5. Open a new Bash terminal (`Ctrl + Shift + Ö`) and run: `bun install`, `bun run generate-api` and then `bun run dev`.
+6. Go to http://localhost:3000 if you used VSCode and simply click the link in the terminal if you used the browser version of codespaces.
 
 ### Running Locally
 
@@ -41,13 +45,9 @@ You can either run the project locally or via Github codespaces. Since Github ha
 
 4. After configuration has finished in the open terminal, it should say `Done. Press any key to close the terminal`.
 
-5. Open a new Bash terminal (`Ctrl + Shift + Ö`) and run: `bun install`, `bun run generate-api` and then `bun run dev`. If you are developing the [backend application](https://github.com/fsek/WebWebWeb) and want to test the frontend against it, make sure to specify the backend URL in the `.env` file with `NEXT_PUBLIC_API_BASE_URL="http://localhost:8000"`. Otherwise <https://stage.backend.fsektionen.se> will be used.
+5. Open a new Bash terminal (`Ctrl + Shift + Ö`) and run: `bun install`, `bun run generate-api` and then `bun run dev`. 
 
-
-
-    - If you start WebWebWeb in a VSCode window, closing the window or switching to WWW-Web in the same VSCode window will terminate the backend. Open another window instead.
-
-6. Go to http://127.0.0.1:3000/ (or http://localhost:3000/admin) for the website where you can see the project🎉🥳🇱 🇬 🇹 🇲
+6. Go to http://127.0.0.1:3000/ (or http://localhost:3000) for the website where you can see the project🎉🥳🇱 🇬 🇹 🇲
 
 7. From now on, whenever you want to open this project: Open a new VSCode window and in Recent, find `WWW-Web in a unique volume [Dev Container]`. Don't re-run `Clone Repository...` from step 3.
 
