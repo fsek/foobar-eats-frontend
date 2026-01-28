@@ -1,4 +1,5 @@
 "use client";
+
 import { useQuery } from "@tanstack/react-query";
 import {
 	getMenuOptions,
@@ -6,22 +7,16 @@ import {
 } from "@/api/@tanstack/react-query.gen";
 
 export default function Page() {
+	const { data, isPending, refetch } = useQuery({
+		...getMenuOptions(),
+		enabled: false,
+	});
+
 	function onButtonClick() {
-		// alert("Jag fick bara 51 på horse-game. vad fick du?");
-
-		const backend_url = "https://foobar-eats.fly.dev";
-		/*
-		const { data, error, isPending } = useQuery({
-			queryKey: getMenuQueryKey(),
-			queryFn: () => fetch(`${backend_url}/menu}`).then((r) => r.json()),
-		});
-    */
-		const { data, isPending } = useQuery({
-			...getMenuOptions(),
-		});
-
-		alert(data);
+		refetch();
 	}
+
+	console.log(data);
 
 	return (
 		<div className="space-y-4">
