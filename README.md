@@ -41,7 +41,7 @@ You can either run the project locally or via Github codespaces. Since Github ha
 
 2. Open a new VSCode window and install Dev Containers extension from the Extensions menu.
 
-3. Open the Command Palette (`Ctrl + Shift + P` / `Cmd + Shift + P`) and select `Dev Containers: Clone Repository in Container Volume...`. Select `GitHub`, then enter `fsek/WWW-Web.git`.
+3. Open the Command Palette (`Ctrl + Shift + P` / `Cmd + Shift + P`) and select `Dev Containers: Clone Repository in Container Volume...`. Select `GitHub`, then enter `fsek/foobar-eats-frontend.git`.
 
 4. After configuration has finished in the open terminal, it should say `Done. Press any key to close the terminal`.
 
@@ -49,7 +49,7 @@ You can either run the project locally or via Github codespaces. Since Github ha
 
 6. Go to http://127.0.0.1:3000/ (or http://localhost:3000) for the website where you can see the project🎉🥳🇱 🇬 🇹 🇲
 
-7. From now on, whenever you want to open this project: Open a new VSCode window and in Recent, find `WWW-Web in a unique volume [Dev Container]`. Don't re-run `Clone Repository...` from step 3.
+7. From now on, whenever you want to open this project: Open a new VSCode window and in Recent, find `foobar-eats-frontend in a unique volume [Dev Container]`. Don't re-run `Clone Repository...` from step 3.
 
 ## Troubleshooting
 - `Ctrl + Shift + P` and type `Rebuild Container`.
