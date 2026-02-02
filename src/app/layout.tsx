@@ -2,9 +2,9 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./globals.css";
-import { client } from "@/api";
+// import { client } from "@/api";
 
-client.setConfig({ baseUrl: "https://foobar-eats.fly.dev" });
+// client.setConfig({ baseUrl: "https://foobar-eats.fly.dev" });
 const queryClient = new QueryClient();
 
 export default function Layout({ children }: { children: React.ReactNode }) {
