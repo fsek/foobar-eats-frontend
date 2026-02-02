@@ -6,6 +6,9 @@ export default function Page() {
 		alert("<3");
 	}
 
+	const menuItems = getMenuOptions();
+
+
 	return (
 		<div className="space-y-4">
 			<button
@@ -31,6 +34,29 @@ export default function Page() {
 				<li>Ännu en punkt i en punktlista</li>
 				<li>Banana</li>
 			</ul>
+
+			<table>
+				<caption className="caption-top">
+					Meny
+				</caption>
+				<thead>
+					<tr  className="border border-gray-300">
+						<th> Id </th>
+						<th> Maträtt </th>
+						<th> Beskrivning </th>
+						<th> Pris </th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td className="border border-gray-300"> 1 </td>
+						<td className="border border-gray-300"> Pasta </td>
+						<td className="border border-gray-300"> Pasta, lättsaltad, med två tomater </td>
+						<td className="border border-gray-300"> 35 kr </td>
+					</tr>
+				</tbody>
+			</table>
+
 		</div>
 	);
 }
