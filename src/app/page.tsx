@@ -32,7 +32,7 @@ export default function Page() {
 			</p>
 
 			<ul className="list-disc">
-				{data?.map( x => (<li> <b>{x.name}</b> | {x.price} kr <ol> {x.description} </ol> </li>))}
+				{data?.map( x => (<li key={x.id}> <b>{x.name}</b> | {x.price} kr <ol> {x.description} </ol> </li>))}
 			</ul>
 
 			
