@@ -1,7 +1,12 @@
+"use client";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./globals.css";
+import { createClient } from "@hey-api/client-fetch";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
+		<QueryClientProvider client={new QueryClient()}>
 		<html lang="sv">
 			<body className="mx-auto max-w-6xl px-4 min-h-screen flex flex-col">
 				<header className="my-16 flex flex-col">
@@ -22,5 +27,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 				</footer>
 			</body>
 		</html>
+		</QueryClientProvider>
 	);
 }

@@ -1,12 +1,14 @@
 "use client";
 import {getMenuOptions} from "src/api/@tanstack/react-query.gen.ts";
+import {useQuery} from "@tanstack/react-query"
 
 export default function Page() {
 	function onButtonClick() {
 		alert("<3");
 	}
 
-	const menuItems = getMenuOptions();
+	const { data } = useQuery(getMenuOptions());
+	console.log(data)
 
 
 	return (
@@ -30,32 +32,10 @@ export default function Page() {
 			</p>
 
 			<ul className="list-disc">
-				<li>En punkt i en punktlista</li>
-				<li>Ännu en punkt i en punktlista</li>
-				<li>Banana</li>
+				{data?.map( x => (<li> <b>{x.name}</b> | {x.price} kr <ol> {x.description} </ol> </li>))}
 			</ul>
 
-			<table>
-				<caption className="caption-top">
-					Meny
-				</caption>
-				<thead>
-					<tr  className="border border-gray-300">
-						<th> Id </th>
-						<th> Maträtt </th>
-						<th> Beskrivning </th>
-						<th> Pris </th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td className="border border-gray-300"> 1 </td>
-						<td className="border border-gray-300"> Pasta </td>
-						<td className="border border-gray-300"> Pasta, lättsaltad, med två tomater </td>
-						<td className="border border-gray-300"> 35 kr </td>
-					</tr>
-				</tbody>
-			</table>
+			
 
 		</div>
 	);
