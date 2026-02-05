@@ -12,7 +12,7 @@ export default function Page() {
 	) as HTMLInputElement;
 	let adress: string;
 
-	const noteInput: HTMLINputElement = document.getElementById(
+	const noteInput: HTMLInputElement = document.getElementById(
 		"note",
 	) as HTMLInputElement;
 	let note: string;
