@@ -2,63 +2,40 @@
 import { getMenuOptions } from "src/api/@tanstack/react-query.gen.ts";
 import { postOrdersMutation } from "src/api/@tanstack/react-query.gen.ts";
 import { useQuery } from "@tanstack/react-query";
+import { z } from "zod";
+import MenuItemButton from "./MenuItemButton";
+import { useState } from "react";
+import OrderButton from "./OrderButton";
+import InputLine from "./InputLine";
 
 export default function Page() {
 	const { data } = useQuery(getMenuOptions());
 
-	//för att lägga beställningar:
-	const adressInput: HTMLInputElement = document.getElementById(
-		"adress",
-	) as HTMLInputElement;
-	let adress: string;
+	const [order, setOrder] = useState<number[]>([]);
 
-	const noteInput: HTMLInputElement = document.getElementById(
-		"note",
-	) as HTMLInputElement;
-	let note: string;
+	const [adress, setAdress] = useState<string>("");
+	const [note, setNote] = useState<string>("");
 
-	function onButtonClick() {
-		adress = adressInput.value;
-		note = noteInput.value;
-	}
+	console.log(adress);
 
 	return (
 		<div className="space-y-4">
-			<ul className="list-disc">
-				{data?.map((x) => (
-					<li key={x.id}>
-						{" "}
-						<b>{x.name}</b> | {x.price} kr | Antal:
-						<select id={String(x.id)}>
-							<option value="0">0</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-						</select>
-						<ol> {x.description} </ol>{" "}
-					</li>
-				))}
-			</ul>
+			{data?.map((x) => (
+				<p key={x.id}>
+					<MenuItemButton
+						addItem={(x) => setOrder([x.id, ...order])}
+						item={x}
+						key={x.id}
+					/>
+					<br />
+				</p>
+			))}
 
-			<p>
-				Adress: <input type="text" id="adress" /> <br />
-				Kommentar: <input type="text" id="note" />
-			</p>
+			<InputLine addText={(x) => setAdress(x)} text="Adress" />
+			<InputLine addText={(x) => setAdress(x)} text="Note" />
+			<br />
 
-			{/* <form onSubmit={(e) => {   
-  		e.preventDefault(); 
- 			adress = e.target.value;
-			}}>
-			<label for="adress" >Adress:</label> <input type="text" id="adress" name="adress"/>
-		</form> */}
-
-			<button
-				type="button"
-				className="bg-amber-400 shadow-sm text-lg font-medium hover:bg-amber-500 active:bg-amber-600 border-amber-500 border-2 px-4 py-2 text-white rounded-md"
-				onClick={onButtonClick}
-			>
-				Beställ
-			</button>
+			<OrderButton itemsOrdered={order} />
 		</div>
 	);
 }
