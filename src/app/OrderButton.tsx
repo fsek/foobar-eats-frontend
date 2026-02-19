@@ -2,6 +2,7 @@ import { NotifyEvent } from "@tanstack/react-query";
 import { useState } from "react";
 
 interface OrderButtonProps {
+	placeOrder: () => void;
 	itemsOrdered: number[];
 	adress: string;
 	note: string;
