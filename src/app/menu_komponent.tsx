@@ -15,8 +15,8 @@ export default function Komponent({ menuitem }: { menuitem: MenuItem }) {
 	const { data } = useQuery(getMenuOptions());
 	return (
 		<div>
-			{data?.map((menuitem) => (
-				<>
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+				{data?.map((menuitem) => (
 					<div
 						onClick={() => alert(`Du har beställt: ${menuitem.name}`)}
 						className="border rounded-xl p-6 shadow-md hover:shadow-xl hover:scale-105
@@ -27,8 +27,8 @@ export default function Komponent({ menuitem }: { menuitem: MenuItem }) {
 						<div>ID: {menuitem.id}</div>
 						<div>Description: {menuitem.description}</div>
 					</div>
-				</>
-			))}
+				))}
+			</div>
 		</div>
 	);
 }
