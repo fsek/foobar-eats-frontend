@@ -19,13 +19,14 @@ export default function Komponent({ menuitem }: { menuitem: MenuItem }) {
 				<>
 					<div
 						onClick={() => alert(`Du har beställt: ${menuitem.name}`)}
-						className="border rounded-xl p-4 shadow-md hover:shadow-xl hover:scale-105
-			transition duration-300 cursor-pointer bg-pink-400 w-64"
-					></div>
-					<div>Name: {menuitem.name}</div>
-					<div>Price: {menuitem.price} kr</div>
-					<div>ID: {menuitem.id}</div>
-					<div>Description: {menuitem.description}</div>
+						className="border rounded-xl p-6 shadow-md hover:shadow-xl hover:scale-105
+			transition duration-300 cursor-pointer bg-pink-400 w-64 min-h-32"
+					>
+						<div>Name: {menuitem.name}</div>
+						<div>Price: {menuitem.price} kr</div>
+						<div>ID: {menuitem.id}</div>
+						<div>Description: {menuitem.description}</div>
+					</div>
 				</>
 			))}
 		</div>
