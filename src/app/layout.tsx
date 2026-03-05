@@ -1,3 +1,4 @@
+"use client";
 import "./globals.css";
 import { client } from "@/api";
 import {
@@ -19,7 +20,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 					</span>
 				</header>
 				<ReactQueryClientProvider client={queryClient}>
-				<main>{children}</main>
+					<main>{children}</main>
 				</ReactQueryClientProvider>
 				<footer className="mt-auto py-4">
 					<p className="text-center text-sm text-neutral-400">
