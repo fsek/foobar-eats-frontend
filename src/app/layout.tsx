@@ -1,6 +1,12 @@
 import "./globals.css";
+import { client } from "@/api";
+import {
+	QueryClient,
+	QueryClientProvider as ReactQueryClientProvider,
+} from "@tanstack/react-query";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+	const queryClient = new QueryClient();
 	return (
 		<html lang="sv">
 			<body className="mx-auto max-w-6xl px-4 min-h-screen flex flex-col">
@@ -12,9 +18,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 						Eating, Unleashed.®
 					</span>
 				</header>
-
+				<ReactQueryClientProvider client={queryClient}>
 				<main>{children}</main>
-
+				</ReactQueryClientProvider>
 				<footer className="mt-auto py-4">
 					<p className="text-center text-sm text-neutral-400">
 						&copy; {new Date().getFullYear()} FooBar Eats. All rights reserved.
