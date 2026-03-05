@@ -4,12 +4,10 @@ import { client, getMenuOptions } from "@/api";
 import {
 	QueryClient,
 	QueryClientProvider as ReactQueryClientProvider,
-	useQuery,
 } from "@tanstack/react-query";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	const queryClient = new QueryClient();
-	const {data}= useQuery(getMenuOptions());
 	return (
 		<html lang="sv">
 			<body className="mx-auto max-w-6xl px-4 min-h-screen flex flex-col">
